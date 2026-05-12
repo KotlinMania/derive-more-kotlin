@@ -302,7 +302,7 @@ Changing [MSRV] (minimum supported Rust version) of this crate is treated as a *
 
 ```kotlin
 dependencies {
-    implementation("io.github.kotlinmania:derive-more-kotlin:0.1.0-SNAPSHOT")
+    implementation("io.github.kotlinmania:derive-more-kotlin:0.1.0")
 }
 ```
 
