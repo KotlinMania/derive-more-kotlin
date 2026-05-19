@@ -4,14 +4,14 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 5/10 (50.0%)
-- **Function parity:** 4/27 matched (target 11) — 14.8%
-- **Class/type parity:** 6/16 matched (target 6) — 37.5%
-- **Combined symbol parity:** 10/43 matched (target 17) — 23.3%
-- **Average inline-code cosine:** 0.47 (function body across 5 matched files)
-- **Average documentation cosine:** 0.66 (doc text across 5 matched files)
+- **Files Present:** 10/10 (100.0%)
+- **Function parity:** 13/21 matched (target 35) — 61.9%
+- **Class/type parity:** 14/16 matched (target 26) — 87.5%
+- **Combined symbol parity:** 27/37 matched (target 61) — 73.0%
+- **Average inline-code cosine:** 0.44 (function body across 10 matched files)
+- **Average documentation cosine:** 0.66 (doc text across 10 matched files)
 - **Cheat-zeroed Files:** 0
-- **Critical Issues:** 4 files with <0.60 function similarity
+- **Critical Issues:** 8 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -49,7 +49,51 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/2 matched
 - **Missing types:** _none_
 
-### 3. ops
+### 3. as
+
+- **Target:** `derivemore.As`
+- **Similarity:** 0.06
+- **Dependents:** 0
+- **Priority Score:** 30609.4
+- **Functions:** 1/2 matched (target 5)
+- **Missing functions:** `__extract_ref`
+- **Types:** 2/4 matched (target 8)
+- **Missing types:** `Frm`, `To`
+
+### 4. fmt
+
+- **Target:** `derivemore.Fmt`
+- **Similarity:** 0.30
+- **Dependents:** 0
+- **Priority Score:** 20907.0
+- **Functions:** 5/7 matched
+- **Missing functions:** `new`, `write_str`
+- **Types:** 2/2 matched
+- **Missing types:** _none_
+
+### 5. add
+
+- **Target:** `derivemore.Add`
+- **Similarity:** 0.24
+- **Dependents:** 0
+- **Priority Score:** 10507.6
+- **Functions:** 2/3 matched (target 4)
+- **Missing functions:** `fmt`
+- **Types:** 2/2 matched (target 4)
+- **Missing types:** _none_
+
+### 6. convert
+
+- **Target:** `derivemore.Convert`
+- **Similarity:** 0.42
+- **Dependents:** 0
+- **Priority Score:** 10405.8
+- **Functions:** 1/2 matched (target 8)
+- **Missing functions:** `fmt`
+- **Types:** 2/2 matched
+- **Missing types:** _none_
+
+### 7. ops
 
 - **Target:** `derivemore.Ops`
 - **Similarity:** 0.40
@@ -60,7 +104,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched
 - **Missing types:** _none_
 
-### 4. str
+### 8. str
 
 - **Target:** `derivemore.Str`
 - **Similarity:** 0.40
@@ -71,7 +115,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched
 - **Missing types:** _none_
 
-### 5. cmp
+### 9. cmp
 
 - **Target:** `derivemore.Cmp`
 - **Similarity:** 1.00
@@ -80,6 +124,17 @@ Every matched file is listed below with function and type symbol parity.
 - **Functions:** 0/0 matched
 - **Missing functions:** _none_
 - **Types:** 1/1 matched
+- **Missing types:** _none_
+
+### 10. lib
+
+- **Target:** `derivemore.Lib`
+- **Similarity:** 1.00
+- **Dependents:** 0
+- **Priority Score:** 0.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 4)
 - **Missing types:** _none_
 
 ## Success Criteria
@@ -101,15 +156,3 @@ cd tools/ast_distance
 # Get next high-priority task
 ./ast_distance --assign tasks.json <agent-id>
 ```
-## Reexport / Wiring Modules
-
-These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
-normal priority and missing-file ladders because they are wiring
-modules, not direct logic ports. Consult them for call-site routing;
-do not treat them as the next implementation target by default.
-
-### Missing
-
-| Source | Expected target | Deps | Source path | Expected path |
-|--------|-----------------|------|-------------|---------------|
-| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
