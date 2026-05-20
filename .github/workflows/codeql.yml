@@ -31,10 +31,6 @@ name: "CodeQL Advanced"
 # manual for java-kotlin even though autobuild is the template default.
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   schedule:
     - cron: "0 7 * * 1"
   workflow_dispatch:
