@@ -25,6 +25,8 @@ class TryFromReprError<T> private constructor(
 
     override fun toString(): String = "`$input` does not correspond to a unit variant"
 
+    fun toException(): Exception = Exception(toString())
+
     override fun equals(other: Any?): Boolean =
         other is TryFromReprError<*> && input == other.input
 
@@ -57,6 +59,8 @@ class TryIntoError<T> private constructor(
     }
 
     override fun toString(): String = "Only $variantNames can be converted to $outputType"
+
+    fun toException(): Exception = Exception(toString())
 
     override fun equals(other: Any?): Boolean =
         other is TryIntoError<*> &&
