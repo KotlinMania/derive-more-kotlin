@@ -32,6 +32,8 @@ class TryUnwrapError<T> private constructor(
     override fun toString(): String =
         "Attempt to call `$enumName::$funcName()` on a `$enumName::$variantName` value"
 
+    fun toException(): Exception = Exception(toString())
+
     override fun equals(other: Any?): Boolean =
         other is TryUnwrapError<*> &&
             input == other.input &&
