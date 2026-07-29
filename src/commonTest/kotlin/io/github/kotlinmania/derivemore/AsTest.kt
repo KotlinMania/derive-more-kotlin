@@ -13,7 +13,9 @@ class AsTest {
 
     @Test
     fun asRefExtractRefDelegatesToAsRef() {
-        class Wrapper(val inner: Int) : AsRef<Int> {
+        class Wrapper(
+            val inner: Int,
+        ) : AsRef<Int> {
             override fun asRef(): Int = inner
         }
 
@@ -30,7 +32,9 @@ class AsTest {
 
     @Test
     fun asMutExtractRefDelegatesToAsMut() {
-        class MutableWrapper(var inner: Int) : AsMut<Int> {
+        class MutableWrapper(
+            var inner: Int,
+        ) : AsMut<Int> {
             override fun asMut(): Int = inner
         }
 

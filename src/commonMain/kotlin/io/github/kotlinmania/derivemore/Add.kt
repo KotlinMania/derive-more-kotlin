@@ -11,7 +11,7 @@ package io.github.kotlinmania.derivemore
  */
 class WrongVariantError private constructor(
     private val operationName: String,
-) : Exception("Trying to ${operationName}() mismatched enum variants") {
+) : Exception("Trying to $operationName() mismatched enum variants") {
     companion object {
         fun new(operationName: String): WrongVariantError = WrongVariantError(operationName)
     }

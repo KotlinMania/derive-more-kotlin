@@ -8,12 +8,13 @@ class TryUnwrapTest {
     @Test
     fun tryUnwrapErrorCarriesInputAndDisplayMessage() {
         val input = "Maybe.Nothing"
-        val error = TryUnwrapError.new(
-            input = input,
-            enumName = "Maybe",
-            variantName = "Just",
-            funcName = "tryUnwrapNothingMut",
-        )
+        val error =
+            TryUnwrapError.new(
+                input = input,
+                enumName = "Maybe",
+                variantName = "Just",
+                funcName = "tryUnwrapNothingMut",
+            )
         val throwable = error.toException()
 
         assertEquals(input, error.input)

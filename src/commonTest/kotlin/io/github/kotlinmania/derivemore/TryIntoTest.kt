@@ -7,11 +7,12 @@ import kotlin.test.assertEquals
 class TryIntoTest {
     @Test
     fun conversionErrorCarriesInputAndDisplayMessage() {
-        val error = TryIntoError.new(
-            input = "SmallInt",
-            variantNames = "NamedBigInt, UnsignedWithIgnoredField, NamedUnsignedWithIgnoredField",
-            outputType = "Long",
-        )
+        val error =
+            TryIntoError.new(
+                input = "SmallInt",
+                variantNames = "NamedBigInt, UnsignedWithIgnoredField, NamedUnsignedWithIgnoredField",
+                outputType = "Long",
+            )
         val throwable = error.toException()
 
         assertEquals("SmallInt", error.input)

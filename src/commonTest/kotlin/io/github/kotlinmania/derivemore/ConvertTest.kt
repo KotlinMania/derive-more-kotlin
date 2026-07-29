@@ -32,11 +32,12 @@ class ConvertTest {
 
     @Test
     fun tryIntoErrorDisplayMessageWithMultipleVariantNames() {
-        val error = TryIntoError.new(
-            input = "SmallInt",
-            variantNames = "NamedBigInt, UnsignedWithIgnoredField, NamedUnsignedWithIgnoredField",
-            outputType = "Long",
-        )
+        val error =
+            TryIntoError.new(
+                input = "SmallInt",
+                variantNames = "NamedBigInt, UnsignedWithIgnoredField, NamedUnsignedWithIgnoredField",
+                outputType = "Long",
+            )
         assertEquals(
             "Only NamedBigInt, UnsignedWithIgnoredField, NamedUnsignedWithIgnoredField can be converted to Long",
             error.toString(),
@@ -45,11 +46,12 @@ class ConvertTest {
 
     @Test
     fun tryIntoErrorDisplayMessageWithSingleVariantName() {
-        val error = TryIntoError.new(
-            input = "BigInt",
-            variantNames = "SmallInt",
-            outputType = "i32",
-        )
+        val error =
+            TryIntoError.new(
+                input = "BigInt",
+                variantNames = "SmallInt",
+                outputType = "i32",
+            )
         assertEquals("Only SmallInt can be converted to i32", error.toString())
     }
 
