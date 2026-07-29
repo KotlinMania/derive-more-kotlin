@@ -7,7 +7,7 @@ package io.github.kotlinmania.derivemore
  */
 class UnitError private constructor(
     private val operationName: String,
-) : Exception("Cannot ${operationName}() unit variants") {
+) : Exception("Cannot $operationName() unit variants") {
     companion object {
         fun new(operationName: String): UnitError = UnitError(operationName)
     }

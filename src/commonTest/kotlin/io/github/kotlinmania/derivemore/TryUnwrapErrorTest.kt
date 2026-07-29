@@ -23,12 +23,13 @@ class TryUnwrapErrorTest {
 
     @Test
     fun tryUnwrapErrorDisplayWithDifferentVariantAndFunction() {
-        val error = TryUnwrapError.new(
-            input = "SomeValue",
-            enumName = "Result",
-            variantName = "Ok",
-            funcName = "tryUnwrapErr",
-        )
+        val error =
+            TryUnwrapError.new(
+                input = "SomeValue",
+                enumName = "Result",
+                variantName = "Ok",
+                funcName = "tryUnwrapErr",
+            )
         assertEquals(
             "Attempt to call `Result::tryUnwrapErr()` on a `Result::Ok` value",
             error.toString(),
