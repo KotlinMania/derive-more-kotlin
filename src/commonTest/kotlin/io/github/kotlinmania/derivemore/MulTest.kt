@@ -1,22 +1,23 @@
-// port-lint: tests tests/mul.rs
+// port-lint: tests mul.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * Tests mirroring upstream `tests/mul.rs`.
+ * Tests mirroring upstream mul.rs.
  *
- * Upstream uses `#[derive(Mul)]` to generate multiplication operator impls.
+ * Upstream uses the Mul derive to generate multiplication operator impls.
  * Kotlin has no derive macros, so each test type manually implements the
- * `times` operator that the macro would generate, then exercises the same
+ * times operator that the macro would generate, then exercises the same
  * runtime invariants.
  */
 class MulTest {
-
     // --- structs / scalar ---
 
-    data class MyInt(val value: Int) {
+    data class MyInt(
+        val value: Int,
+    ) {
         operator fun times(rhs: Int): MyInt = MyInt(value * rhs)
     }
 
@@ -25,7 +26,10 @@ class MulTest {
         assertEquals(MyInt(-5), MyInt(-1) * 5)
     }
 
-    data class MyInts(val a: Int, val b: Int) {
+    data class MyInts(
+        val a: Int,
+        val b: Int,
+    ) {
         operator fun times(rhs: Int): MyInts = MyInts(a * rhs, b * rhs)
     }
 
@@ -34,7 +38,9 @@ class MulTest {
         assertEquals(MyInts(-5, 15), MyInts(-1, 3) * 5)
     }
 
-    data class Point1D(val x: Int) {
+    data class Point1D(
+        val x: Int,
+    ) {
         operator fun times(rhs: Int): Point1D = Point1D(x * rhs)
     }
 
@@ -43,7 +49,10 @@ class MulTest {
         assertEquals(Point1D(-5), Point1D(-1) * 5)
     }
 
-    data class Point2D(val x: Int, val y: Int) {
+    data class Point2D(
+        val x: Int,
+        val y: Int,
+    ) {
         operator fun times(rhs: Int): Point2D = Point2D(x * rhs, y * rhs)
     }
 
@@ -54,7 +63,9 @@ class MulTest {
 
     // --- structs / structural (forward) ---
 
-    data class MyIntForward(val value: Int) {
+    data class MyIntForward(
+        val value: Int,
+    ) {
         operator fun times(rhs: MyIntForward): MyIntForward = MyIntForward(value * rhs.value)
     }
 
@@ -63,7 +74,10 @@ class MulTest {
         assertEquals(MyIntForward(-5), MyIntForward(-1) * MyIntForward(5))
     }
 
-    data class MyIntsForward(val a: Int, val b: Int) {
+    data class MyIntsForward(
+        val a: Int,
+        val b: Int,
+    ) {
         operator fun times(rhs: MyIntsForward): MyIntsForward =
             MyIntsForward(a * rhs.a, b * rhs.b)
     }
@@ -73,7 +87,9 @@ class MulTest {
         assertEquals(MyIntsForward(-3, 15), MyIntsForward(-1, 3) * MyIntsForward(3, 5))
     }
 
-    data class Point1DForward(val x: Int) {
+    data class Point1DForward(
+        val x: Int,
+    ) {
         operator fun times(rhs: Point1DForward): Point1DForward = Point1DForward(x * rhs.x)
     }
 
@@ -82,7 +98,10 @@ class MulTest {
         assertEquals(Point1DForward(-5), Point1DForward(-1) * Point1DForward(5))
     }
 
-    data class Point2DForward(val x: Int, val y: Int) {
+    data class Point2DForward(
+        val x: Int,
+        val y: Int,
+    ) {
         operator fun times(rhs: Point2DForward): Point2DForward =
             Point2DForward(x * rhs.x, y * rhs.y)
     }
@@ -95,12 +114,32 @@ class MulTest {
     // --- enums / structural (forward) ---
 
     sealed class MixedInts {
-        data class SmallInt(val value: Int) : MixedInts()
-        data class BigInt(val value: Long) : MixedInts()
-        data class TwoSmallInts(val a: Int, val b: Int) : MixedInts()
-        data class NamedSmallInts(val x: Int, val y: Int) : MixedInts()
-        data class UnsignedOne(val value: UInt) : MixedInts()
-        data class UnsignedTwo(val value: UInt) : MixedInts()
+        data class SmallInt(
+            val value: Int,
+        ) : MixedInts()
+
+        data class BigInt(
+            val value: Long,
+        ) : MixedInts()
+
+        data class TwoSmallInts(
+            val a: Int,
+            val b: Int,
+        ) : MixedInts()
+
+        data class NamedSmallInts(
+            val x: Int,
+            val y: Int,
+        ) : MixedInts()
+
+        data class UnsignedOne(
+            val value: UInt,
+        ) : MixedInts()
+
+        data class UnsignedTwo(
+            val value: UInt,
+        ) : MixedInts()
+
         object Unit : MixedInts()
     }
 

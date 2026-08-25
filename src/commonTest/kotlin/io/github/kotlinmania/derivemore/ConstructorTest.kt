@@ -1,4 +1,4 @@
-// port-lint: tests tests/constructor.rs
+// port-lint: tests constructor.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test
@@ -6,15 +6,14 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 /**
- * Tests mirroring upstream `tests/constructor.rs`.
+ * Tests mirroring upstream constructor.rs.
  *
- * Upstream uses `#[derive(Constructor)]` to generate a `new()` constructor.
+ * Upstream uses the Constructor derive to generate a new() constructor.
  * Kotlin has no derive macros, so each test type manually implements the
  * constructor that the macro would generate, then exercises the same
  * runtime invariants.
  */
 class ConstructorTest {
-
     class EmptyTuple {
         companion object {
             fun new(): EmptyTuple = EmptyTuple()
@@ -48,7 +47,10 @@ class ConstructorTest {
         assertNotNull(EmptyUnit.new())
     }
 
-    data class MyInts(val a: Int, val b: Int) {
+    data class MyInts(
+        val a: Int,
+        val b: Int,
+    ) {
         companion object {
             fun new(a: Int, b: Int): MyInts = MyInts(a, b)
         }
@@ -61,7 +63,10 @@ class ConstructorTest {
         assertEquals(2, result.b)
     }
 
-    data class Point2D(val x: Int, val y: Int) {
+    data class Point2D(
+        val x: Int,
+        val y: Int,
+    ) {
         companion object {
             fun new(x: Int, y: Int): Point2D = Point2D(x, y)
         }

@@ -971,6 +971,9 @@ tasks.register("swiftExportSmokeTest") {
             }
         }
 
+        val cltLibDir = "/Library/Developer/CommandLineTools/usr/lib/swift/macosx"
+        val dyldEnv = if (file(cltLibDir).isDirectory) mapOf("DYLD_LIBRARY_PATH" to cltLibDir) else emptyMap()
+
         execOperations
             .exec {
                 workingDir = layout.projectDirectory.dir("swift-test-harness").asFile
@@ -980,6 +983,7 @@ tasks.register("swiftExportSmokeTest") {
         execOperations
             .exec {
                 workingDir = layout.projectDirectory.dir("swift-test-harness").asFile
+                environment(dyldEnv)
                 commandLine("swift", "test")
             }.assertNormalExitValue()
     }

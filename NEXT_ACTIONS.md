@@ -5,13 +5,13 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 10/10 (100.0%)
-- **Function parity:** 13/21 matched (target 35) — 61.9%
-- **Class/type parity:** 14/16 matched (target 26) — 87.5%
-- **Combined symbol parity:** 27/37 matched (target 61) — 73.0%
-- **Average inline-code cosine:** 0.44 (function body across 10 matched files)
+- **Function parity:** 13/21 matched (target 65) — 61.9%
+- **Class/type parity:** 14/16 matched (target 40) — 87.5%
+- **Combined symbol parity:** 27/37 matched (target 105) — 73.0%
+- **Average inline-code cosine:** 0.34 (function body across 10 matched files)
 - **Average documentation cosine:** 0.66 (doc text across 10 matched files)
-- **Cheat-zeroed Files:** 0
-- **Critical Issues:** 8 files with <0.60 function similarity
+- **Cheat-zeroed Files:** 1
+- **Critical Issues:** 9 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -33,9 +33,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.39
 - **Dependents:** 1
 - **Priority Score:** 1010306.1
-- **Functions:** 1/2 matched (target 4)
+- **Functions:** 1/2 matched (target 9)
 - **Missing functions:** `fmt`
-- **Types:** 1/1 matched
+- **Types:** 1/1 matched (target 3)
 - **Missing types:** _none_
 
 ### 2. as_dyn_error
@@ -77,9 +77,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.24
 - **Dependents:** 0
 - **Priority Score:** 10507.6
-- **Functions:** 2/3 matched (target 4)
+- **Functions:** 2/3 matched (target 21)
 - **Missing functions:** `fmt`
-- **Types:** 2/2 matched (target 4)
+- **Types:** 2/2 matched (target 15)
 - **Missing types:** _none_
 
 ### 6. convert
@@ -88,7 +88,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.42
 - **Dependents:** 0
 - **Priority Score:** 10405.8
-- **Functions:** 1/2 matched (target 8)
+- **Functions:** 1/2 matched (target 10)
 - **Missing functions:** `fmt`
 - **Types:** 2/2 matched
 - **Missing types:** _none_
@@ -128,13 +128,13 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 10. lib
 
-- **Target:** `derivemore.Lib`
-- **Similarity:** 1.00
+- **Target:** `derivemore.Lib [ZERO]`
+- **Similarity:** 0.00
 - **Dependents:** 0
-- **Priority Score:** 0.0
-- **Functions:** 0/0 matched
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 6)
 - **Missing functions:** _none_
-- **Types:** 0/0 matched (target 4)
+- **Types:** 0/0 matched (target 5)
 - **Missing types:** _none_
 
 ## Success Criteria
@@ -146,13 +146,3 @@ For each file to be considered "complete":
 - Documentation ported
 - port-lint header present
 
-## Next Commands
-
-```bash
-# Initialize task queue for systematic porting
-cd tools/ast_distance
-./ast_distance --init-tasks ../../tmp/derive_more/src rust ../../src/commonMain/kotlin/io/github/kotlinmania/derivemore kotlin tasks.json ../../AGENTS.md
-
-# Get next high-priority task
-./ast_distance --assign tasks.json <agent-id>
-```

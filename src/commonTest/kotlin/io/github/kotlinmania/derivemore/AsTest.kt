@@ -1,4 +1,4 @@
-// port-lint: tests tests/as_ref.rs
+// port-lint: tests as_ref.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test

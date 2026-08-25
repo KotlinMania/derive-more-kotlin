@@ -1,4 +1,4 @@
-// port-lint: tests tests/unwrap.rs
+// port-lint: tests unwrap.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test
@@ -6,19 +6,20 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 /**
- * Tests mirroring upstream `tests/unwrap.rs`.
+ * Tests mirroring upstream unwrap.rs.
  *
- * Upstream uses `#[derive(Unwrap)]` to generate unwrap methods on enum variants.
+ * Upstream uses the Unwrap derive to generate unwrap methods on enum variants.
  * Kotlin has no derive macros, so each test enum manually implements the
  * unwrap methods that the macro would generate, then exercises the same
  * runtime invariants.
  */
 class UnwrapTest {
-
     sealed class Maybe<out T> {
         object Nothing : Maybe<Nothing>()
 
-        data class Just<T>(val value: T) : Maybe<T>()
+        data class Just<T>(
+            val value: T,
+        ) : Maybe<T>()
     }
 
     private fun <T> Maybe<T>.unwrapJust(): T =
@@ -40,11 +41,20 @@ class UnwrapTest {
     sealed class Tuple<out T> {
         object None : Tuple<Nothing>()
 
-        data class Single<T>(val value: T) : Tuple<T>()
+        data class Single<T>(
+            val value: T,
+        ) : Tuple<T>()
 
-        data class Double<T>(val first: T, val second: T) : Tuple<T>()
+        data class Double<T>(
+            val first: T,
+            val second: T,
+        ) : Tuple<T>()
 
-        data class Triple<T>(val a: T, val b: T, val c: T) : Tuple<T>()
+        data class Triple<T>(
+            val a: T,
+            val b: T,
+            val c: T,
+        ) : Tuple<T>()
     }
 
     private fun <T> Tuple<T>.unwrapDoubleMut(): Pair<T, T> =
