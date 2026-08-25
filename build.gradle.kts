@@ -929,7 +929,9 @@ tasks.register("swiftExportSmokeTest") {
                 .dir("swift-test")
                 .get()
                 .asFile
-                .absolutePath
+        swiftBuildDir.deleteRecursively()
+        swiftBuildDir.mkdirs()
+        val swiftBuildDirPath = swiftBuildDir.absolutePath
         execOperations
             .exec {
                 workingDir = projectDir
@@ -942,8 +944,8 @@ tasks.register("swiftExportSmokeTest") {
                 )
                 environment(
                     mapOf(
-                        "BUILT_PRODUCTS_DIR" to swiftBuildDir,
-                        "TARGET_BUILD_DIR" to swiftBuildDir,
+                        "BUILT_PRODUCTS_DIR" to swiftBuildDirPath,
+                        "TARGET_BUILD_DIR" to swiftBuildDirPath,
                         "SDK_NAME" to "macosx",
                         "CONFIGURATION" to "Debug",
                         "ARCHS" to "arm64",
