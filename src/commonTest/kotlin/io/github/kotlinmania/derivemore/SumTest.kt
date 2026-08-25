@@ -1,20 +1,22 @@
-// port-lint: tests tests/sum.rs
+// port-lint: tests sum.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * Tests mirroring upstream `tests/sum.rs`.
+ * Tests mirroring upstream sum.rs.
  *
- * Upstream uses `#[derive(Sum)]` to generate `Sum` trait impls, which require
- * an `Add` impl to already exist. Kotlin has no derive macros, so each test
- * type manually implements the `plus` (Add) and the fold-based `sum` that the
+ * Upstream uses the Sum derive to generate Sum trait impls, which require
+ * an Add impl to already exist. Kotlin has no derive macros, so each test
+ * type manually implements plus (Add) and the fold-based sum that the
  * macro would generate, then exercises the same runtime invariants.
  */
 class SumTest {
-
-    data class MyInts(val a: Int, val b: Long) {
+    data class MyInts(
+        val a: Int,
+        val b: Long,
+    ) {
         operator fun plus(rhs: MyInts): MyInts = MyInts(a + rhs.a, b + rhs.b)
     }
 
@@ -25,7 +27,10 @@ class SumTest {
         assertEquals(MyInts(9, 12), result)
     }
 
-    data class Point2D(val x: Int, val y: Int) {
+    data class Point2D(
+        val x: Int,
+        val y: Int,
+    ) {
         operator fun plus(rhs: Point2D): Point2D = Point2D(x + rhs.x, y + rhs.y)
     }
 

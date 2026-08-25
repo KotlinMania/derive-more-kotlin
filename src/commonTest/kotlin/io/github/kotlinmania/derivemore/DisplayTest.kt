@@ -1,15 +1,15 @@
-// port-lint: tests tests/display.rs
+// port-lint: tests display.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * Tests mirroring upstream `tests/display.rs`.
+ * Tests mirroring upstream display.rs.
  *
- * Upstream uses `#[derive(Display)]` to generate `Display` impls that produce
+ * Upstream uses the Display derive to generate Display impls that produce
  * the type name (or a custom format string). Kotlin has no derive macros, so
- * each test type manually overrides `toString()` that the macro would
+ * each test type manually overrides toString() that the macro would
  * generate, then exercises the same runtime invariants.
  *
  * Only the struct unit/named-field runtime assertions from the first few
@@ -19,7 +19,6 @@ import kotlin.test.assertEquals
  * derive behavior.
  */
 class DisplayTest {
-
     class Unit {
         override fun toString(): String = "Unit"
     }
@@ -56,7 +55,7 @@ class DisplayTest {
         assertEquals("Struct", Struct().toString())
     }
 
-    // --- custom display string via #[display("...")] ---
+    // --- custom display string via display attribute ---
 
     class CustomUnit {
         override fun toString(): String = "unit"
@@ -85,7 +84,7 @@ class DisplayTest {
         assertEquals("struct", CustomStruct().toString())
     }
 
-    // --- interpolated display via #[display("...: {}", field)] ---
+    // --- interpolated display via format template ---
 
     class InterpolatedUnit {
         override fun toString(): String = "unit: 0"
@@ -114,9 +113,11 @@ class DisplayTest {
         assertEquals("struct: 0", InterpolatedStruct().toString())
     }
 
-    // --- single-field display via #[display("...")] on field ---
+    // --- single-field display via field template ---
 
-    data class NamedField(val x: Int) {
+    data class NamedField(
+        val x: Int,
+    ) {
         override fun toString(): String = "$x"
     }
 
@@ -125,7 +126,9 @@ class DisplayTest {
         assertEquals("42", NamedField(42).toString())
     }
 
-    data class TupleField(val value: Int) {
+    data class TupleField(
+        val value: Int,
+    ) {
         override fun toString(): String = "$value"
     }
 

@@ -1,4 +1,4 @@
-// port-lint: tests tests/partial_eq.rs
+// port-lint: tests partial_eq.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test
@@ -6,15 +6,14 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
 /**
- * Tests mirroring upstream `tests/partial_eq.rs`.
+ * Tests mirroring upstream partial_eq.rs.
  *
- * Upstream uses `#[derive(PartialEq)]` to generate `PartialEq` impls.
- * Kotlin data classes auto-generate `equals`/`hashCode`, so the derived
+ * Upstream uses the PartialEq derive to generate PartialEq impls.
+ * Kotlin data classes auto-generate equals/hashCode, so the derived
  * behavior is already available. These tests exercise the same equality
  * invariants the upstream tests verify.
  */
 class PartialEqTest {
-
     object Baz
 
     @Test
@@ -24,6 +23,7 @@ class PartialEqTest {
 
     class EmptyTuple {
         override fun equals(other: Any?): Boolean = other is EmptyTuple
+
         override fun hashCode(): Int = EmptyTuple::class.hashCode()
     }
 
@@ -34,6 +34,7 @@ class PartialEqTest {
 
     class EmptyStruct {
         override fun equals(other: Any?): Boolean = other is EmptyStruct
+
         override fun hashCode(): Int = EmptyStruct::class.hashCode()
     }
 
@@ -42,7 +43,10 @@ class PartialEqTest {
         assertEquals(EmptyStruct(), EmptyStruct())
     }
 
-    data class MultiFieldTuple(val a: Boolean, val b: Int)
+    data class MultiFieldTuple(
+        val a: Boolean,
+        val b: Int,
+    )
 
     @Test
     fun multiFieldTupleEquality() {
@@ -52,7 +56,10 @@ class PartialEqTest {
         assertNotEquals(MultiFieldTuple(true, 0), MultiFieldTuple(false, 1))
     }
 
-    data class MultiFieldStruct(val b: Boolean, val i: Int)
+    data class MultiFieldStruct(
+        val b: Boolean,
+        val i: Int,
+    )
 
     @Test
     fun multiFieldStructEquality() {
@@ -62,7 +69,10 @@ class PartialEqTest {
         assertNotEquals(MultiFieldStruct(true, 0), MultiFieldStruct(false, 1))
     }
 
-    data class RecursiveTuple(val first: RecursiveTuple?, val rest: List<RecursiveTuple>)
+    data class RecursiveTuple(
+        val first: RecursiveTuple?,
+        val rest: List<RecursiveTuple>,
+    )
 
     @Test
     fun recursiveTupleEquality() {

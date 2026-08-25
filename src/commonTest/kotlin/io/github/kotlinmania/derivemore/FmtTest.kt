@@ -1,4 +1,4 @@
-// port-lint: tests tests/debug.rs
+// port-lint: tests debug.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test

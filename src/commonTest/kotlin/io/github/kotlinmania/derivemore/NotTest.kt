@@ -1,20 +1,22 @@
-// port-lint: tests tests/not.rs
+// port-lint: tests not.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * Tests mirroring upstream `tests/not.rs`.
+ * Tests mirroring upstream not.rs.
  *
- * Upstream uses `#[derive(Not)]` to generate bitwise-NOT/logical-NOT operator
+ * Upstream uses the Not derive to generate bitwise-NOT/logical-NOT operator
  * impls. Kotlin has no derive macros, so each test type manually implements
- * the `unaryNot`/`inv` operator that the macro would generate, then exercises
+ * the unaryNot/inv operator that the macro would generate, then exercises
  * the same runtime invariants.
  */
 class NotTest {
-
-    data class MyInts(val a: Int, val b: Int) {
+    data class MyInts(
+        val a: Int,
+        val b: Int,
+    ) {
         operator fun not(): MyInts = MyInts(a.inv(), b.inv())
     }
 
@@ -25,7 +27,10 @@ class NotTest {
         assertEquals(MyInts(12.inv(), 21.inv()), result)
     }
 
-    data class Point2D(val x: Int, val y: Int) {
+    data class Point2D(
+        val x: Int,
+        val y: Int,
+    ) {
         operator fun not(): Point2D = Point2D(x.inv(), y.inv())
     }
 
@@ -37,12 +42,31 @@ class NotTest {
     }
 
     sealed class MixedInts {
-        data class SmallInt(val value: Int) : MixedInts()
-        data class BigInt(val value: Long) : MixedInts()
-        data class TwoSmallInts(val a: Int, val b: Int) : MixedInts()
-        data class NamedSmallInts(val x: Int, val y: Int) : MixedInts()
-        data class UnsignedOne(val value: UInt) : MixedInts()
-        data class UnsignedTwo(val value: UInt) : MixedInts()
+        data class SmallInt(
+            val value: Int,
+        ) : MixedInts()
+
+        data class BigInt(
+            val value: Long,
+        ) : MixedInts()
+
+        data class TwoSmallInts(
+            val a: Int,
+            val b: Int,
+        ) : MixedInts()
+
+        data class NamedSmallInts(
+            val x: Int,
+            val y: Int,
+        ) : MixedInts()
+
+        data class UnsignedOne(
+            val value: UInt,
+        ) : MixedInts()
+
+        data class UnsignedTwo(
+            val value: UInt,
+        ) : MixedInts()
     }
 
     private operator fun MixedInts.not(): MixedInts =
@@ -98,7 +122,10 @@ class NotTest {
     }
 
     sealed class EnumWithUnit {
-        data class SmallInt(val value: Int) : EnumWithUnit()
+        data class SmallInt(
+            val value: Int,
+        ) : EnumWithUnit()
+
         object Unit : EnumWithUnit()
     }
 

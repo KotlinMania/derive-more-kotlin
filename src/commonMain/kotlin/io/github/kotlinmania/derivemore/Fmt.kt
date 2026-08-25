@@ -90,12 +90,15 @@ fun debugTuple(name: String): DebugTuple = DebugTuple(name)
 /**
  * Wrapper adding 4 spaces on newlines for inner pretty printed debug values.
  */
-private class Padded(
+class Padded(
     private val output: StringBuilder,
 ) {
     private var onNewline = true
 
-    fun writeString(value: String) {
+    /**
+     * Writes a string, indenting each new line with four spaces.
+     */
+    fun writeStr(value: String) {
         val pieces = value.split("\n")
         for (index in pieces.indices) {
             if (onNewline) {
@@ -109,6 +112,13 @@ private class Padded(
                 onNewline = false
             }
         }
+    }
+
+    companion object {
+        /**
+         * Creates a new Padded wrapper around an output builder.
+         */
+        fun new(output: StringBuilder): Padded = Padded(output)
     }
 }
 

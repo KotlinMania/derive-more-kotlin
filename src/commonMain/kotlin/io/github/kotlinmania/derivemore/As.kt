@@ -17,11 +17,11 @@ package io.github.kotlinmania.derivemore
  */
 class Conv<Frm, To> private constructor() {
     companion object {
-        // Marked `internal` because Swift Export cannot infer Frm/To from
+        // Marked internal because Swift Export cannot infer Frm/To from
         // the bridge call site and fails
-        // `compileSwiftExportMainKotlinMacosArm64` with
-        // `Cannot infer type for type parameter 'Frm' / 'To'`. Common
-        // Kotlin callers can spell `Conv.default<Frm, To>()` directly.
+        // compileSwiftExportMainKotlinMacosArm64 with
+        // cannot infer type for type parameter Frm or To. Common
+        // Kotlin callers can spell Conv.default<Frm, To>() directly.
         internal fun <Frm, To> default(): Conv<Frm, To> = Conv()
     }
 }

@@ -1,4 +1,4 @@
-// port-lint: tests tests/add.rs
+// port-lint: tests add.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test
@@ -32,9 +32,12 @@ class AddTest {
         assertEquals(unitError, error.source())
     }
 
-    // --- struct addition (manually implementing what #[derive(Add)] generates) ---
+    // --- struct addition (manually implementing what Add generates) ---
 
-    data class MyInts(val a: Int, val b: Int) {
+    data class MyInts(
+        val a: Int,
+        val b: Int,
+    ) {
         operator fun plus(rhs: MyInts): MyInts = MyInts(a + rhs.a, b + rhs.b)
     }
 
@@ -43,7 +46,10 @@ class AddTest {
         assertEquals(MyInts(13, 23), MyInts(12, 21) + MyInts(1, 2))
     }
 
-    data class Point2D(val x: Int, val y: Int) {
+    data class Point2D(
+        val x: Int,
+        val y: Int,
+    ) {
         operator fun plus(rhs: Point2D): Point2D = Point2D(x + rhs.x, y + rhs.y)
     }
 
@@ -55,12 +61,32 @@ class AddTest {
     // --- enum addition (forward mode) ---
 
     sealed class MixedInts {
-        data class SmallInt(val value: Int) : MixedInts()
-        data class BigInt(val value: Long) : MixedInts()
-        data class TwoSmallInts(val a: Int, val b: Int) : MixedInts()
-        data class NamedSmallInts(val x: Int, val y: Int) : MixedInts()
-        data class UnsignedOne(val value: UInt) : MixedInts()
-        data class UnsignedTwo(val value: UInt) : MixedInts()
+        data class SmallInt(
+            val value: Int,
+        ) : MixedInts()
+
+        data class BigInt(
+            val value: Long,
+        ) : MixedInts()
+
+        data class TwoSmallInts(
+            val a: Int,
+            val b: Int,
+        ) : MixedInts()
+
+        data class NamedSmallInts(
+            val x: Int,
+            val y: Int,
+        ) : MixedInts()
+
+        data class UnsignedOne(
+            val value: UInt,
+        ) : MixedInts()
+
+        data class UnsignedTwo(
+            val value: UInt,
+        ) : MixedInts()
+
         object Unit : MixedInts()
     }
 

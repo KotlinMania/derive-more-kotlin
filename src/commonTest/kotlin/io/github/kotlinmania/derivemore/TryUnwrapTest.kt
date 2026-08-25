@@ -1,4 +1,4 @@
-// port-lint: tests tests/try_unwrap.rs
+// port-lint: tests try_unwrap.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test

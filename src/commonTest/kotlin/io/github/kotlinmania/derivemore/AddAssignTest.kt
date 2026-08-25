@@ -1,20 +1,22 @@
-// port-lint: tests tests/add_assign.rs
+// port-lint: tests add_assign.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * Tests mirroring upstream `tests/add_assign.rs`.
+ * Tests mirroring upstream add_assign.rs.
  *
- * Upstream uses `#[derive(AddAssign)]` to generate `+=` operator impls.
+ * Upstream uses the AddAssign derive to generate addition assignment operator impls.
  * Kotlin has no derive macros, so each test type manually implements the
- * `plusAssign` operator that the macro would generate, then exercises the
+ * plusAssign operator that the macro would generate, then exercises the
  * same runtime invariants.
  */
 class AddAssignTest {
-
-    data class MyInts(var a: Int, var b: Int) {
+    data class MyInts(
+        var a: Int,
+        var b: Int,
+    ) {
         operator fun plusAssign(rhs: MyInts) {
             a += rhs.a
             b += rhs.b
@@ -28,7 +30,10 @@ class AddAssignTest {
         assertEquals(MyInts(13, 23), value)
     }
 
-    data class Point2D(var x: Int, var y: Int) {
+    data class Point2D(
+        var x: Int,
+        var y: Int,
+    ) {
         operator fun plusAssign(rhs: Point2D) {
             x += rhs.x
             y += rhs.y

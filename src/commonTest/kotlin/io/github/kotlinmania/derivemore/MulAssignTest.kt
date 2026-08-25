@@ -1,22 +1,23 @@
-// port-lint: tests tests/mul_assign.rs
+// port-lint: tests mul_assign.rs
 package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * Tests mirroring upstream `tests/mul_assign.rs`.
+ * Tests mirroring upstream mul_assign.rs.
  *
- * Upstream uses `#[derive(MulAssign)]` to generate `*=` operator impls.
+ * Upstream uses the MulAssign derive to generate multiplication assignment operator impls.
  * Kotlin has no derive macros, so each test type manually implements the
- * `timesAssign` operator that the macro would generate, then exercises the
+ * timesAssign operator that the macro would generate, then exercises the
  * same runtime invariants.
  */
 class MulAssignTest {
-
     // --- scalar ---
 
-    data class MyInt(var value: Int) {
+    data class MyInt(
+        var value: Int,
+    ) {
         operator fun timesAssign(rhs: Int) {
             value *= rhs
         }
@@ -29,7 +30,10 @@ class MulAssignTest {
         assertEquals(MyInt(-5), a)
     }
 
-    data class MyInts(var a: Int, var b: Int) {
+    data class MyInts(
+        var a: Int,
+        var b: Int,
+    ) {
         operator fun timesAssign(rhs: Int) {
             a *= rhs
             b *= rhs
@@ -43,7 +47,9 @@ class MulAssignTest {
         assertEquals(MyInts(-5, 15), a)
     }
 
-    data class Point1D(var x: Int) {
+    data class Point1D(
+        var x: Int,
+    ) {
         operator fun timesAssign(rhs: Int) {
             x *= rhs
         }
@@ -56,7 +62,10 @@ class MulAssignTest {
         assertEquals(Point1D(-5), a)
     }
 
-    data class Point2D(var x: Int, var y: Int) {
+    data class Point2D(
+        var x: Int,
+        var y: Int,
+    ) {
         operator fun timesAssign(rhs: Int) {
             x *= rhs
             y *= rhs
@@ -72,7 +81,9 @@ class MulAssignTest {
 
     // --- structural (forward) ---
 
-    data class MyIntForward(var value: Int) {
+    data class MyIntForward(
+        var value: Int,
+    ) {
         operator fun timesAssign(rhs: MyIntForward) {
             value *= rhs.value
         }
@@ -85,7 +96,10 @@ class MulAssignTest {
         assertEquals(MyIntForward(-5), a)
     }
 
-    data class MyIntsForward(var a: Int, var b: Int) {
+    data class MyIntsForward(
+        var a: Int,
+        var b: Int,
+    ) {
         operator fun timesAssign(rhs: MyIntsForward) {
             a *= rhs.a
             b *= rhs.b
@@ -99,7 +113,9 @@ class MulAssignTest {
         assertEquals(MyIntsForward(-3, 15), a)
     }
 
-    data class Point1DForward(var x: Int) {
+    data class Point1DForward(
+        var x: Int,
+    ) {
         operator fun timesAssign(rhs: Point1DForward) {
             x *= rhs.x
         }
@@ -112,7 +128,10 @@ class MulAssignTest {
         assertEquals(Point1DForward(-5), a)
     }
 
-    data class Point2DForward(var x: Int, var y: Int) {
+    data class Point2DForward(
+        var x: Int,
+        var y: Int,
+    ) {
         operator fun timesAssign(rhs: Point2DForward) {
             x *= rhs.x
             y *= rhs.y
