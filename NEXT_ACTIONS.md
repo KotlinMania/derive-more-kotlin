@@ -5,10 +5,10 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 10/10 (100.0%)
-- **Function parity:** 13/21 matched (target 65) — 61.9%
+- **Function parity:** 15/21 matched (target 66) — 71.4%
 - **Class/type parity:** 14/16 matched (target 40) — 87.5%
-- **Combined symbol parity:** 27/37 matched (target 105) — 73.0%
-- **Average inline-code cosine:** 0.34 (function body across 10 matched files)
+- **Combined symbol parity:** 29/37 matched (target 106) — 78.4%
+- **Average inline-code cosine:** 0.35 (function body across 10 matched files)
 - **Average documentation cosine:** 0.66 (doc text across 10 matched files)
 - **Cheat-zeroed Files:** 1
 - **Critical Issues:** 9 files with <0.60 function similarity
@@ -60,18 +60,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/4 matched (target 8)
 - **Missing types:** `Frm`, `To`
 
-### 4. fmt
-
-- **Target:** `derivemore.Fmt`
-- **Similarity:** 0.30
-- **Dependents:** 0
-- **Priority Score:** 20907.0
-- **Functions:** 5/7 matched
-- **Missing functions:** `new`, `write_str`
-- **Types:** 2/2 matched
-- **Missing types:** _none_
-
-### 5. add
+### 4. add
 
 - **Target:** `derivemore.Add`
 - **Similarity:** 0.24
@@ -82,7 +71,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/2 matched (target 15)
 - **Missing types:** _none_
 
-### 6. convert
+### 5. convert
 
 - **Target:** `derivemore.Convert`
 - **Similarity:** 0.42
@@ -93,7 +82,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/2 matched
 - **Missing types:** _none_
 
-### 7. ops
+### 6. ops
 
 - **Target:** `derivemore.Ops`
 - **Similarity:** 0.40
@@ -104,7 +93,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched
 - **Missing types:** _none_
 
-### 8. str
+### 7. str
 
 - **Target:** `derivemore.Str`
 - **Similarity:** 0.40
@@ -113,6 +102,17 @@ Every matched file is listed below with function and type symbol parity.
 - **Functions:** 1/2 matched (target 4)
 - **Missing functions:** `fmt`
 - **Types:** 1/1 matched
+- **Missing types:** _none_
+
+### 8. fmt
+
+- **Target:** `derivemore.Fmt`
+- **Similarity:** 0.40
+- **Dependents:** 0
+- **Priority Score:** 906.0
+- **Functions:** 7/7 matched (target 8)
+- **Missing functions:** _none_
+- **Types:** 2/2 matched
 - **Missing types:** _none_
 
 ### 9. cmp
