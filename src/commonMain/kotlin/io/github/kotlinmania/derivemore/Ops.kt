@@ -12,5 +12,5 @@ class UnitError private constructor(
         fun new(operationName: String): UnitError = UnitError(operationName)
     }
 
-    override fun toString(): String = message ?: ""
+    override fun toString(): String = message.orEmpty()
 }

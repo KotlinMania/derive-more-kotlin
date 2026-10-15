@@ -16,7 +16,7 @@ class WrongVariantError private constructor(
         fun new(operationName: String): WrongVariantError = WrongVariantError(operationName)
     }
 
-    override fun toString(): String = message ?: ""
+    override fun toString(): String = message.orEmpty()
 }
 
 /**

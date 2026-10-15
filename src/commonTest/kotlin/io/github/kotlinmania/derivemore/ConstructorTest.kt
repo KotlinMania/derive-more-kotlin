@@ -14,7 +14,7 @@ import kotlin.test.assertNotNull
  * runtime invariants.
  */
 class ConstructorTest {
-    class EmptyTuple {
+    class EmptyTuple private constructor() {
         companion object {
             fun new(): EmptyTuple = EmptyTuple()
         }
@@ -25,7 +25,7 @@ class ConstructorTest {
         assertNotNull(EmptyTuple.new())
     }
 
-    class EmptyStruct {
+    class EmptyStruct private constructor() {
         companion object {
             fun new(): EmptyStruct = EmptyStruct()
         }
@@ -36,7 +36,7 @@ class ConstructorTest {
         assertNotNull(EmptyStruct.new())
     }
 
-    class EmptyUnit {
+    class EmptyUnit private constructor() {
         companion object {
             fun new(): EmptyUnit = EmptyUnit()
         }

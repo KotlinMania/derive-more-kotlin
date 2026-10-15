@@ -145,22 +145,37 @@ class MulTest {
 
     private operator fun MixedInts.times(rhs: MixedInts): Result<MixedInts> =
         when {
-            this is MixedInts.SmallInt && rhs is MixedInts.SmallInt ->
+            this is MixedInts.SmallInt && rhs is MixedInts.SmallInt -> {
                 Result.success(MixedInts.SmallInt(value * rhs.value))
-            this is MixedInts.BigInt && rhs is MixedInts.BigInt ->
+            }
+
+            this is MixedInts.BigInt && rhs is MixedInts.BigInt -> {
                 Result.success(MixedInts.BigInt(value * rhs.value))
-            this is MixedInts.TwoSmallInts && rhs is MixedInts.TwoSmallInts ->
+            }
+
+            this is MixedInts.TwoSmallInts && rhs is MixedInts.TwoSmallInts -> {
                 Result.success(MixedInts.TwoSmallInts(a * rhs.a, b * rhs.b))
-            this is MixedInts.NamedSmallInts && rhs is MixedInts.NamedSmallInts ->
+            }
+
+            this is MixedInts.NamedSmallInts && rhs is MixedInts.NamedSmallInts -> {
                 Result.success(MixedInts.NamedSmallInts(x * rhs.x, y * rhs.y))
-            this is MixedInts.UnsignedOne && rhs is MixedInts.UnsignedOne ->
+            }
+
+            this is MixedInts.UnsignedOne && rhs is MixedInts.UnsignedOne -> {
                 Result.success(MixedInts.UnsignedOne(value * rhs.value))
-            this is MixedInts.UnsignedTwo && rhs is MixedInts.UnsignedTwo ->
+            }
+
+            this is MixedInts.UnsignedTwo && rhs is MixedInts.UnsignedTwo -> {
                 Result.success(MixedInts.UnsignedTwo(value * rhs.value))
-            this is MixedInts.Unit && rhs is MixedInts.Unit ->
+            }
+
+            this is MixedInts.Unit && rhs is MixedInts.Unit -> {
                 Result.failure(UnitError.new("mul"))
-            else ->
+            }
+
+            else -> {
                 Result.failure(WrongVariantError.new("mul"))
+            }
         }
 
     @Test

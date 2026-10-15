@@ -3,6 +3,7 @@ package io.github.kotlinmania.derivemore
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 /**
  * Tests mirroring upstream not.rs.
@@ -134,4 +135,19 @@ class NotTest {
             is EnumWithUnit.SmallInt -> EnumWithUnit.SmallInt(value.inv())
             is EnumWithUnit.Unit -> throw UnitError.new("not")
         }
+
+    @Test
+    fun enumWithUnitSmallIntNot() {
+        val input: EnumWithUnit = EnumWithUnit.SmallInt(5)
+        val result = !input
+        assertEquals(EnumWithUnit.SmallInt(5.inv()), result)
+    }
+
+    @Test
+    fun enumWithUnitUnitNotThrows() {
+        val input: EnumWithUnit = EnumWithUnit.Unit
+        assertFailsWith<UnitError> {
+            !input
+        }
+    }
 }

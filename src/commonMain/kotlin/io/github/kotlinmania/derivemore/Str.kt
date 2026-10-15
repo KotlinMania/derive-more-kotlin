@@ -11,7 +11,7 @@ class FromStrError private constructor(
         fun new(typeName: String): FromStrError = FromStrError(typeName)
     }
 
-    override fun toString(): String = message ?: ""
+    override fun toString(): String = message.orEmpty()
 
     override fun equals(other: Any?): Boolean =
         other is FromStrError && typeName == other.typeName
